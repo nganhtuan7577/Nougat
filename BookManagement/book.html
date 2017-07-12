@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Books Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="book.js"></script>
+</head>
+
+<body ng-app="bookModule">
+    <div class="bookClass" ng-controller="bookCtrl">
+        <table class="table">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Author</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="books in bookData">
+                    <td>
+                        <div ng-hide="isEditing[books.id]">{{books.id}}</div>
+                        <div ng-show="isEditing[books.id]"><input type ="text" ng-model="books.id"/></div>
+                    </td>
+                    <td>
+                        <div ng-hide="isEditing[books.id]">{{books.name}}</div>
+                        <div ng-show="isEditing[books.id]"><input type ="text" ng-model="books.name"/></div>
+                    </td>
+                    <td>
+                        <div ng-hide="isEditing[books.id]">{{books.author}}</div>
+                        <div ng-show="isEditing[books.id]"><input type ="text" ng-model="books.author"/></div>
+                    </td>
+                    <td>
+                        <button class="btn btn-info" ng-hide="isEditing[books.id]" ng-click="edit(books)">Edit</button>
+                        <button class="btn btn-info" ng-show="isEditing[books.id]" ng-click="save(books)">Save</button>
+	                    <button class="btn btn-info" ng-click="delete($index)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <td>
+                <input type="text" value="ID" placeholder="ID" ng-model="inputID" />
+            </td>
+            <td>
+                <input type="text" value="Name" placeholder="Name" ng-model="inputName" />
+            </td>
+            <td>
+                <input type="text" value="Author" placeholder="Author" ng-model="inputAuthor" />
+            </td>
+            <td>
+                <button ng-click="add()">Add</button>
+            </td>
+        </table>
+        </div>
+</body>
+</html>

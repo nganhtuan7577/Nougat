@@ -33,8 +33,7 @@
       <tbody>
         <tr ng-repeat="books in bookData | filter:byParameter">
           <td align="center">
-            <div ng-hide="isEditing[books.id]">{{books.id}}</div>
-            <div ng-show="isEditing[books.id]"><input type="text" ng-model="books.id" /></div>
+            <div>{{$index+1}}</div>
           </td>
           <td>
             <div ng-hide="isEditing[books.id]">{{books.name}}</div>
@@ -62,15 +61,15 @@
             </div>
           </td>
           <td align="center">
-            <md-button class="md-raised md-primary" md-no-ink ng-hide="isEditing[books.id]" ng-click="edit(books)">Edit</md-button>
-            <md-button class="md-raised md-primary" md-no-ink ng-show="isEditing[books.id]" ng-click="save(books); saveLocalStorage()">Save</md-button>
-            <md-button class="md-raised md-primary" md-no-ink ng-click="delete($index); saveLocalStorage()">Delete</md-button>
+            <md-button class="md-raised md-primary" md-no-ink ng-hide="isEditing[books.id]" ng-click="edit($index)">Edit</md-button>
+            <md-button class="md-raised md-primary" md-no-ink ng-show="isEditing[books.id]" ng-click="save($index); saveLocalStorage()">Save</md-button>
+            <md-button class="md-raised md-primary" md-no-ink ng-click="delete(); saveLocalStorage()">Delete</md-button>
           </td>
         </tr>
       </tbody>
       <tfoot>
         <td>
-          <input type="text" value="ID" placeholder="ID" ng-model="inputID" />
+          <!--<input type="text" value="ID" placeholder="ID" ng-model="inputID" />-->
         </td>
         <td>
           <input type="text" value="Name" placeholder="Name" ng-model="inputName" />

@@ -14,19 +14,16 @@ bookModule.service('bookService', function () {
     this.delete = function (bookData, index) {
         bookData.splice(index, 1);
     }
-    this.add = function (bookData, inputID, inputName, inputAuthor, inputRating) {
-        bookData.push({
-            id: inputID,
-            name: inputName,
-            author: inputAuthor,
-            rating: inputRating
-        });
+    this.add = function () {
+    }
+    this.demoService = function (x) {
+        return x * x;
     }
 });
 bookModule.controller('bookCtrl', function ($scope, bookService) {
-    if (localStorage.bookData) { //Pull data from Local Storage if it exists
+    if (localStorage.bookData) {
         $scope.bookData = JSON.parse(localStorage.bookData);
-    } else { //Create one if it does not exist
+    } else {
         $scope.bookData = [
             { id: 1, name: 'Harry Potter', author: 'JKR', rating: 5 },
             { id: 2, name: 'Your Name', author: 'SM', rating: 9 },
@@ -34,31 +31,52 @@ bookModule.controller('bookCtrl', function ($scope, bookService) {
         ];
         localStorage.bookData = angular.toJson($scope.bookData, true);
     }
-    //Rating levels
     $scope.levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (rate) {
         return { abbrev: rate };
     });
+    $scope.viewing = true;
+    $scope.modifying = false;
     $scope.isEditing = {};
     length = $scope.bookData.length;
-    //Set all status to false
+    //for (var i = 0; i < length; i++) {
+    //$scope.viewing = true;
+    //$scope.modifying = false;
+    //$scope.isEditing[$scope.bookData[i].id] = true;
+    //$scope.bookData[i].id = bookService.demoService($scope.bookData[i].id);
+    //}
     bookService.setStatus($scope.bookData, $scope.isEditing);
-    //Edit book data
+    //$scope.edit = function (bookData) {
+    //$scope.viewing = false;
+    //$scope.modifying = true;
+    //$scope.isEditing[bookData.id] = true;
+    //$scope.isEditing[bookData.id] = bookService.changeStatus($scope.isEditing[bookData.id]);
+    //}
     $scope.edit = function (index) {
+        //bookService.edit($scope.bookData[index], $scope.isEditing);
         bookService.edit($scope.bookData[index], $scope.isEditing);
     }
-    //Save data after finish edit
+    //$scope.save = function (bookData) {
+    //$scope.viewing = true;
+    //$scope.modifying = false;
+    //$scope.isEditing[bookData.id] = false;
+    //}
     $scope.save = function (index) {
         bookService.save($scope.bookData[index], $scope.isEditing);
     }
-    //Delete one row in table
+    //$scope.delete = function (index) {
+    //$scope.bookData.splice(index, 1);
+    //}
     $scope.delete = function (index) {
         bookService.delete($scope.bookData, index);
     }
-    //Add new row in table
     $scope.add = function () {
-        bookService.add($scope.bookData, $scope.bookData.length + 1, $scope.inputName, $scope.inputAuthor, $scope.inputRating);
+        $scope.bookData.push({
+            id: $scope.inputID,
+            name: $scope.inputName,
+            author: $scope.inputAuthor,
+            rating: $scope.inputRating
+        });
     }
-    //Push data to Local Storage
     $scope.saveLocalStorage = function () {
         localStorage.bookData = angular.toJson($scope.bookData, true);
     }

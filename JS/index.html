@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Books Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="js.js"></script>
+</head>
+
+<body ng-app="bookModule">
+    <div class="bookClass" ng-controller="bookCtrl">
+        <table>
+            <thead>
+                <th>zone</th>
+                <th>list</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="(zone, list) in bookData">
+                    <td>{{zone}}</td>
+                    <td>{{list}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

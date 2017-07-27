@@ -6,9 +6,8 @@ bookModule.controller('bookCtrl', function ($scope) {
         { id: 2, name: 'Your Name', author: 'SM', rating: 9 },
         { id: 3, name: 'Bloody Exam', author: 'LM', rating: 6 }
     ];
-    $scope.levels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (rate) {
-        return { abbrev: rate };
-    });
+    $scope.icons = ["fingerprint", "grade", "get_app", "home", "launch"];
+	$scope.levels = [1, 2, 3, 4, 5];
     $scope.viewing = true;
     $scope.modifying = false;
     $scope.isEditing = {};
